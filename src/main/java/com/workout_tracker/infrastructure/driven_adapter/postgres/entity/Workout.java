@@ -1,14 +1,20 @@
 package com.workout_tracker.infrastructure.driven_adapter.postgres.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -19,7 +25,7 @@ public class Workout {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "UUID")
+    @Column(updatable = false, nullable = false, columnDefinition = "UUID")
     UUID id;
     String name;
     LocalDateTime date;
@@ -30,5 +36,5 @@ public class Workout {
             joinColumns = @JoinColumn(name = "workout_id"),
             inverseJoinColumns = @JoinColumn(name = "exercise_id")
     )
-    Set<Exercise> exercises;
+    List<Exercise> exercises;
 }
