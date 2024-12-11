@@ -1,4 +1,4 @@
-package com.WorkoutTracker;
+package com.workout_tracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class WorkoutTrackerApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void contextLoads() { // not implemented yet
 	}
 
 }

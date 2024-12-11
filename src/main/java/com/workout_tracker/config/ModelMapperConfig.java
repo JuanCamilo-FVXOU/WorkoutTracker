@@ -1,4 +1,4 @@
-package com.WorkoutTracker.config;
+package com.workout_tracker.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
