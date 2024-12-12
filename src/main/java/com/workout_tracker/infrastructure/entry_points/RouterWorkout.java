@@ -14,7 +14,7 @@ public class RouterWorkout {
     return RouterFunctions
         .route()
         .path("/api/v1", builder -> builder
-            .POST("/workout", handlerWorkout::createWorkout))
+            .GET("/workout", handlerWorkout::getAllWorkouts))
         .build();
   }
 }

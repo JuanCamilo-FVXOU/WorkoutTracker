@@ -1,4 +1,4 @@
-package com.workout_tracker.domain.model;
+package com.workout_tracker.domain.model.gateways;
 
 import com.workout_tracker.infrastructure.driven_adapter.postgres.entity.Exercise;
 import reactor.core.publisher.Flux;

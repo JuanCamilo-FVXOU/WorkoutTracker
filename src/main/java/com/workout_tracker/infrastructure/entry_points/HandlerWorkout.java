@@ -1,5 +1,7 @@
 package com.workout_tracker.infrastructure.entry_points;
 
+import com.workout_tracker.domain.model.WorkoutDto;
+import com.workout_tracker.domain.usecases.CreateWorkoutUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -12,7 +14,9 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class HandlerWorkout {
 
-  public Mono<ServerResponse> createWorkout(ServerRequest severRequest) {
-    return Mono.empty();
+  private final CreateWorkoutUseCase createWorkoutUseCase;
+
+  public Mono<ServerResponse> getAllWorkouts(ServerRequest severRequest) {
+    return ServerResponse.ok().body(this.createWorkoutUseCase.getWorkouts(), WorkoutDto.class);
   }
 }

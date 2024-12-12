@@ -1,14 +1,15 @@
-package com.workout_tracker.infrastructure.driven_adapter.postgres.repository;
+package com.workout_tracker.infrastructure.driven_adapter.postgres.adapters;
 
+import com.workout_tracker.domain.model.gateways.ExerciseGateway;
 import com.workout_tracker.infrastructure.driven_adapter.postgres.entity.Exercise;
+import com.workout_tracker.infrastructure.driven_adapter.postgres.repository.ExerciseRepository;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.UUID;
-
 @RequiredArgsConstructor
-public class ExerciseAdapter {
+public class ExerciseAdapter implements ExerciseGateway {
 private final ExerciseRepository exerciseRepository;
 
     public Mono<Exercise> save(Exercise exercise) {
