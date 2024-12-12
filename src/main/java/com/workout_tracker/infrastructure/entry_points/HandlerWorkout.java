@@ -16,7 +16,10 @@ public class HandlerWorkout {
 
   private final CreateWorkoutUseCase createWorkoutUseCase;
 
-  public Mono<ServerResponse> getAllWorkouts(ServerRequest severRequest) {
-    return ServerResponse.ok().body(this.createWorkoutUseCase.getWorkouts(), WorkoutDto.class);
+  public Mono<ServerResponse> createWorkout(ServerRequest serverRequest) {
+    return serverRequest.bodyToMono(WorkoutDto.class)
+        .flatMap(this.createWorkoutUseCase::execute)
+        .flatMap(result -> ServerResponse.ok().bodyValue(result))
+        .onErrorResume(ex -> ServerResponse.badRequest().bodyValue(ex.getMessage()));
   }
 }

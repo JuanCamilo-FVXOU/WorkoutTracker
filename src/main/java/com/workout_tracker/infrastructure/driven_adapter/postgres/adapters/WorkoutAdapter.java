@@ -22,7 +22,7 @@ public class WorkoutAdapter extends
   }
 
   public Mono<WorkoutDto> create(WorkoutDto workout) {
-    return Mono.empty();
+    return this.save(workout);
   }
 
   public Flux<WorkoutDto> getAll() {
