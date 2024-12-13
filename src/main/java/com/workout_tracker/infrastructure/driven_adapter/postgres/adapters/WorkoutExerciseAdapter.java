@@ -9,9 +9,9 @@ import com.workout_tracker.infrastructure.driven_adapter.postgres.repository.Wor
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.UUID;
-import java.util.function.Function;
 
 @Repository
 public class WorkoutExerciseAdapter extends ReactiveAdapterOperations<WorkoutExerciseDto, WorkoutExercise
@@ -25,5 +25,10 @@ public class WorkoutExerciseAdapter extends ReactiveAdapterOperations<WorkoutExe
     public Flux<ExerciseDto> getExercisesByWorkoutId(UUID workoutId) {
         return this.repository.getByWorkoutId(workoutId)
                 .map(result -> mapper.map(result, ExerciseDto.class));
+    }
+
+    @Override
+    public Mono<Void> addWorkoutExercise(WorkoutExerciseDto workoutExerciseDto) {
+        return this.save(workoutExerciseDto).then();
     }
 }

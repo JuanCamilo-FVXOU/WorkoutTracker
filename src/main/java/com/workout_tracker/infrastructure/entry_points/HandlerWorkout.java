@@ -1,8 +1,8 @@
 package com.workout_tracker.infrastructure.entry_points;
 
-import com.workout_tracker.domain.model.WorkoutDto;
 import com.workout_tracker.domain.usecases.CreateWorkoutUseCase;
 import com.workout_tracker.domain.usecases.GetWorkoutUseCase;
+import com.workout_tracker.infrastructure.entry_points.dto.WorkoutRequest;
 import com.workout_tracker.infrastructure.entry_points.dto.WorkoutWithoutExercisesResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +27,12 @@ public class HandlerWorkout {
     private final ModelMapper mapper;
 
     public Mono<ServerResponse> createWorkout(ServerRequest serverRequest) {
-        return serverRequest.bodyToMono(WorkoutDto.class)
+        return serverRequest.bodyToMono(WorkoutRequest.class)
                 .flatMap(this.createWorkoutUseCase::execute)
-                .flatMap(result -> ServerResponse.ok().bodyValue(result))
+                .flatMap(result -> {
+                    WorkoutWithoutExercisesResponse response = this.mapper.map(result, WorkoutWithoutExercisesResponse.class);
+                    return ServerResponse.ok().bodyValue(response);
+                })
                 .onErrorResume(ex -> ServerResponse.badRequest().bodyValue(ex.getMessage()));
     }
 

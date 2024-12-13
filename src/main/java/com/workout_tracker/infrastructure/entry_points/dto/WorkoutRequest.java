@@ -1,4 +1,4 @@
-package com.workout_tracker.domain.model;
+package com.workout_tracker.infrastructure.entry_points.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,11 +15,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class WorkoutDto {
+public class WorkoutRequest {
 
-  UUID id;
-  String name;
-  LocalDateTime date;
-  Boolean isActive;
-  List<ExerciseDto> exercises;
+    UUID id;
+    String name;
+    LocalDateTime date;
+    Boolean isActive;
+    List<UUID> exercisesIds;
 }

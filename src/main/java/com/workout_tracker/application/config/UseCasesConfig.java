@@ -4,6 +4,7 @@ import com.workout_tracker.domain.model.gateways.WorkoutExerciseGateway;
 import com.workout_tracker.domain.model.gateways.WorkoutGateway;
 import com.workout_tracker.domain.usecases.CreateWorkoutUseCase;
 import com.workout_tracker.domain.usecases.GetWorkoutUseCase;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +19,8 @@ import org.springframework.context.annotation.FilterType;
 public class UseCasesConfig {
 
     @Bean
-    public CreateWorkoutUseCase createWorkoutUseCase(WorkoutGateway workoutGateway) {
-        return new CreateWorkoutUseCase(workoutGateway);
+    public CreateWorkoutUseCase createWorkoutUseCase(WorkoutGateway workoutGateway, ModelMapper modelMapper, WorkoutExerciseGateway workoutExerciseGateway) {
+        return new CreateWorkoutUseCase(workoutGateway, workoutExerciseGateway, modelMapper);
     }
 
     @Bean
