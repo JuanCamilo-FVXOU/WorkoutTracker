@@ -20,5 +20,6 @@ public class WorkoutDto {
   UUID id;
   String name;
   LocalDateTime date;
-  List<Exercise> exercises;
+  Boolean isActive;
+  List<ExerciseDto> exercises;
 }

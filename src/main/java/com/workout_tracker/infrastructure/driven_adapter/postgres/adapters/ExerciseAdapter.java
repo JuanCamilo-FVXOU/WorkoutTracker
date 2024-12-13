@@ -22,4 +22,8 @@ public class ExerciseAdapter extends ReactiveAdapterOperations<ExerciseDto, Exer
     super(repository, mapper, d -> mapper.map(d, ExerciseDto.class));
   }
 
+  @Override
+  public Flux<ExerciseDto> findExerciseByWorkoutId(UUID workoutId) {
+    return this.findAll();
+  }
 }

@@ -30,7 +30,7 @@ public class WorkoutAdapter extends
   }
 
   public Mono<WorkoutDto> getById(UUID id) {
-    return Mono.empty();
+    return this.findById(id);
   }
 
   public Mono<Void> delete(UUID id) {
