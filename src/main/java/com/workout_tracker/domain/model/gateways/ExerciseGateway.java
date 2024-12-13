@@ -7,8 +7,5 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 public interface ExerciseGateway {
-    Mono<Exercise> save(Exercise exercise);
     Flux<Exercise> findAll();
-    Mono<Exercise> findById(UUID id);
-    void deleteById(UUID id);
 }

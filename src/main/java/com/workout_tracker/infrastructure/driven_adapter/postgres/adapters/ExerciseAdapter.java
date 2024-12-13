@@ -1,30 +1,25 @@
 package com.workout_tracker.infrastructure.driven_adapter.postgres.adapters;
 
+import com.workout_tracker.domain.model.ExerciseDto;
+import com.workout_tracker.domain.model.WorkoutDto;
 import com.workout_tracker.domain.model.gateways.ExerciseGateway;
 import com.workout_tracker.infrastructure.driven_adapter.postgres.entity.Exercise;
+import com.workout_tracker.infrastructure.driven_adapter.postgres.helper.ReactiveAdapterOperations;
 import com.workout_tracker.infrastructure.driven_adapter.postgres.repository.ExerciseRepository;
 import java.util.UUID;
+import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@RequiredArgsConstructor
-public class ExerciseAdapter implements ExerciseGateway {
-private final ExerciseRepository exerciseRepository;
+@Repository
+public class ExerciseAdapter extends ReactiveAdapterOperations<ExerciseDto, Exercise, UUID, ExerciseRepository>
+    implements ExerciseGateway {
 
-    public Mono<Exercise> save(Exercise exercise) {
-        return this.exerciseRepository.save(exercise);
-    }
+  public ExerciseAdapter(ExerciseRepository repository, ModelMapper mapper) {
+    super(repository, mapper, d -> mapper.map(d, ExerciseDto.class));
+  }
 
-    public Flux<Exercise> findAll() {
-        return this.exerciseRepository.findAll();
-    }
-
-    public Mono<Exercise> findById(UUID id) {
-        return this.exerciseRepository.findById(id);
-    }
-
-    public void deleteById(UUID id) {
-        this.exerciseRepository.deleteById(id);
-    }
 }
