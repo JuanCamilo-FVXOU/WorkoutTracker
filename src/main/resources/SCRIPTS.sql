@@ -17,10 +17,11 @@ create table public.workout_exercise
     exercise_id uuid                            not null
 );
 
-create table public.workout_exercise
+create table public.workouts
 (
-    id          uuid default uuid_generate_v4() not null
-        primary key,
-    workout_id  uuid                            not null,
-    exercise_id uuid                            not null
+    id   uuid default uuid_generate_v4() not null
+        constraint workout_pkey
+            primary key,
+    date timestamp(6),
+    name varchar(255)
 );
