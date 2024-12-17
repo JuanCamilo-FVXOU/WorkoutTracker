@@ -7,16 +7,14 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 @Configuration
-public class RouterWorkout {
+public class RouterExercise {
 
     @Bean
-    public RouterFunction<ServerResponse> workoutRouter(HandlerWorkout handlerWorkout) {
-        return RouterFunctions
-                .route()
-                .path("/api/v1/workout", builder -> builder
-                        .GET(handlerWorkout::getWorkouts)
-                        .GET("/{id}", handlerWorkout::getWorkoutById)
-                        .POST(handlerWorkout::createWorkout))
+    public RouterFunction<ServerResponse> exerciseRouter(HandlerExercise handlerExercise) {
+        return RouterFunctions.route()
+                .path("/api/v1/exercise", builder -> builder
+                        .GET(handlerExercise::getExercises)
+                        .GET("/{id}", handlerExercise::getExerciseById))
                 .build();
     }
 }

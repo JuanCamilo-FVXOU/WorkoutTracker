@@ -11,7 +11,4 @@ import java.util.UUID;
 
 public interface ExerciseRepository extends ReactiveCrudRepository<Exercise, UUID>,
     ReactiveQueryByExampleExecutor<Exercise> {
-
-    @Query("SELECT e.* FROM exercises e INNER JOIN workout_exercise we ON e.id = we.exercise_id WHERE we.workout_id = :workOutId")
-    Flux<Exercise> findByWorkoutId(@Param("workOutId") UUID workoutId);
 }

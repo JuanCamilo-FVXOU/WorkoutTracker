@@ -22,8 +22,18 @@ public class ExerciseAdapter extends ReactiveAdapterOperations<ExerciseDto, Exer
     super(repository, mapper, d -> mapper.map(d, ExerciseDto.class));
   }
 
-  @Override
-  public Flux<ExerciseDto> findExerciseByWorkoutId(UUID workoutId) {
+  public Mono<ExerciseDto> create(ExerciseDto exercise) {
+    return this.save(exercise);
+  }
+
+  public Flux<ExerciseDto> getAll() {
     return this.findAll();
+  }
+
+  public Mono<ExerciseDto> getById(UUID id) {
+    return this.findById(id);
+  }
+  public Mono<Void> delete(UUID id) {
+    return Mono.empty();
   }
 }
