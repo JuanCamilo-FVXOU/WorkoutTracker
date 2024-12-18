@@ -3,6 +3,7 @@ package com.workout_tracker.infrastructure.entry_points;
 import com.workout_tracker.domain.model.ExerciseDto;
 import com.workout_tracker.domain.usecases.CreateExerciseUseCase;
 import com.workout_tracker.domain.usecases.GetExerciseUseCase;
+import com.workout_tracker.infrastructure.entry_points.dto.ExerciseRequest;
 import com.workout_tracker.infrastructure.entry_points.dto.WorkoutRequest;
 import com.workout_tracker.infrastructure.entry_points.dto.WorkoutWithoutExercisesResponse;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,12 @@ public class HandlerExercise {
     private final GetExerciseUseCase getExerciseUseCase;
     private final ModelMapper mapper;
 
-
+    public Mono<ServerResponse> createExercise(ServerRequest serverRequest) {
+        return serverRequest.bodyToMono(ExerciseRequest.class)
+                .flatMap(createExerciseUseCase::save)
+                .flatMap(result -> ServerResponse.ok().bodyValue(result))
+                .onErrorResume(ex -> ServerResponse.badRequest().bodyValue(ex.getMessage()));
+    }
     public Mono<ServerResponse> getExercises(ServerRequest serverRequest) {
         return ServerResponse.ok().body(this.getExerciseUseCase.getExercises(), ExerciseDto.class);
     }
