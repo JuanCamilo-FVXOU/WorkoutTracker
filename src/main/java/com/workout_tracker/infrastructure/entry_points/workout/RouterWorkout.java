@@ -17,7 +17,7 @@ public class RouterWorkout {
             .GET(item -> handlerWorkout.getWorkouts())
             .GET("/{id}", handlerWorkout::getWorkoutById)
             .POST(handlerWorkout::createWorkout)
-            .POST(handlerWorkout::addExerciseToExistingWorkout))
+            .POST("/addExercise", handlerWorkout::addExerciseToExistingWorkout))
         .build();
   }
 }
