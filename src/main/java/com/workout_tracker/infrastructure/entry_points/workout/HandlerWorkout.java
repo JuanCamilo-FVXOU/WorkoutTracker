@@ -1,4 +1,4 @@
-package com.workout_tracker.infrastructure.entry_points;
+package com.workout_tracker.infrastructure.entry_points.workout;
 
 import com.workout_tracker.domain.usecases.CreateWorkoutUseCase;
 import com.workout_tracker.domain.usecases.GetWorkoutUseCase;
@@ -36,7 +36,7 @@ public class HandlerWorkout {
                 .onErrorResume(ex -> ServerResponse.badRequest().bodyValue(ex.getMessage()));
     }
 
-    public Mono<ServerResponse> getWorkouts(ServerRequest serverRequest) {
+    public Mono<ServerResponse> getWorkouts() {
         return ServerResponse.ok().body(this.getWorkoutUseCase.getWorkouts()
                         .map(result ->
                                 this.mapper.map(result, WorkoutWithoutExercisesResponse.class)),

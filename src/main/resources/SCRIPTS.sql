@@ -22,6 +22,7 @@ create table public.workouts
     id   uuid default uuid_generate_v4() not null
         constraint workout_pkey
             primary key,
+    is_active boolean not null default false,
     date timestamp(6),
     name varchar(255)
 );

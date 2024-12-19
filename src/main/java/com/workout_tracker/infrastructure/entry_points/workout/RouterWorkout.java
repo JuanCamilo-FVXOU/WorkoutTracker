@@ -1,4 +1,4 @@
-package com.workout_tracker.infrastructure.entry_points;
+package com.workout_tracker.infrastructure.entry_points.workout;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,16 +7,16 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 @Configuration
-public class RouterExercise {
+public class RouterWorkout {
 
     @Bean
-    public RouterFunction<ServerResponse> exerciseRouter(HandlerExercise handlerExercise) {
+    public RouterFunction<ServerResponse> workoutRouter(HandlerWorkout handlerWorkout) {
         return RouterFunctions
                 .route()
-                .path("/api/v1/exercise", builder -> builder
-                        .GET(handlerExercise::getExercises)
-                        .GET("/{id}", handlerExercise::getExerciseById))
-                        .POST(handlerExercise::createExercise)
+                .path("/api/v1/workout", builder -> builder
+                        .GET(item -> handlerWorkout.getWorkouts())
+                        .GET("/{id}", handlerWorkout::getWorkoutById)
+                        .POST(handlerWorkout::createWorkout))
                 .build();
     }
 }

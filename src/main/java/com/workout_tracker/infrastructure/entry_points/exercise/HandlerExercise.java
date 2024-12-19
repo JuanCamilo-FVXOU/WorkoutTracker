@@ -1,20 +1,16 @@
-package com.workout_tracker.infrastructure.entry_points;
+package com.workout_tracker.infrastructure.entry_points.exercise;
 
 import com.workout_tracker.domain.model.ExerciseDto;
 import com.workout_tracker.domain.usecases.CreateExerciseUseCase;
 import com.workout_tracker.domain.usecases.GetExerciseUseCase;
 import com.workout_tracker.infrastructure.entry_points.dto.ExerciseRequest;
-import com.workout_tracker.infrastructure.entry_points.dto.WorkoutRequest;
-import com.workout_tracker.infrastructure.entry_points.dto.WorkoutWithoutExercisesResponse;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
-
-import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -22,7 +18,6 @@ import java.util.UUID;
 public class HandlerExercise {
     private final CreateExerciseUseCase createExerciseUseCase;
     private final GetExerciseUseCase getExerciseUseCase;
-    private final ModelMapper mapper;
 
     public Mono<ServerResponse> createExercise(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(ExerciseRequest.class)
@@ -30,7 +25,7 @@ public class HandlerExercise {
                 .flatMap(result -> ServerResponse.ok().bodyValue(result))
                 .onErrorResume(ex -> ServerResponse.badRequest().bodyValue(ex.getMessage()));
     }
-    public Mono<ServerResponse> getExercises(ServerRequest serverRequest) {
+    public Mono<ServerResponse> getExercises() {
         return ServerResponse.ok().body(this.getExerciseUseCase.getExercises(), ExerciseDto.class);
     }
 
