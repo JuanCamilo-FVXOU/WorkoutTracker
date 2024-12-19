@@ -3,6 +3,7 @@ package com.workout_tracker.application.config;
 import com.workout_tracker.domain.model.gateways.ExerciseGateway;
 import com.workout_tracker.domain.model.gateways.WorkoutExerciseGateway;
 import com.workout_tracker.domain.model.gateways.WorkoutGateway;
+import com.workout_tracker.domain.usecases.AddExerciseToWorkoutUseCase;
 import com.workout_tracker.domain.usecases.CreateExerciseUseCase;
 import com.workout_tracker.domain.usecases.CreateWorkoutUseCase;
 import com.workout_tracker.domain.usecases.GetExerciseUseCase;
@@ -41,5 +42,11 @@ public class UseCasesConfig {
   @Bean
   public CreateExerciseUseCase createExerciseUseCase(ExerciseGateway exerciseGateway) {
     return new CreateExerciseUseCase(exerciseGateway);
+  }
+
+  @Bean
+  public AddExerciseToWorkoutUseCase addExerciseToWorkoutUseCase(
+      WorkoutExerciseGateway workoutExerciseGateway) {
+    return new AddExerciseToWorkoutUseCase(workoutExerciseGateway);
   }
 }

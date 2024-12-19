@@ -10,4 +10,5 @@ import java.util.UUID;
 public interface WorkoutExerciseGateway {
     Flux<ExerciseDto> getExercisesByWorkoutId(UUID workoutId);
     Mono<Void> addWorkoutExercise(WorkoutExerciseDto workoutExerciseDto);
+    Mono<Void> create(WorkoutExerciseDto workoutExerciseDto);
 }

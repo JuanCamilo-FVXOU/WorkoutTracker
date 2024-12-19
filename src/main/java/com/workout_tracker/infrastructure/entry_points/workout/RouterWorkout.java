@@ -9,14 +9,15 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 @Configuration
 public class RouterWorkout {
 
-    @Bean
-    public RouterFunction<ServerResponse> workoutRouter(HandlerWorkout handlerWorkout) {
-        return RouterFunctions
-                .route()
-                .path("/api/v1/workout", builder -> builder
-                        .GET(item -> handlerWorkout.getWorkouts())
-                        .GET("/{id}", handlerWorkout::getWorkoutById)
-                        .POST(handlerWorkout::createWorkout))
-                .build();
-    }
+  @Bean
+  public RouterFunction<ServerResponse> workoutRouter(HandlerWorkout handlerWorkout) {
+    return RouterFunctions
+        .route()
+        .path("/api/v1/workout", builder -> builder
+            .GET(item -> handlerWorkout.getWorkouts())
+            .GET("/{id}", handlerWorkout::getWorkoutById)
+            .POST(handlerWorkout::createWorkout)
+            .POST(handlerWorkout::addExerciseToExistingWorkout))
+        .build();
+  }
 }
